@@ -1,0 +1,47 @@
+databaseChangeLog:
+  - changeSet:
+      id: 001-create-price-records
+      author: matvey
+      changes:
+        - createTable:
+            tableName: price_records
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: symbol
+                  type: varchar(20)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: price
+                  type: numeric(38,18)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: fetched_at
+                  type: timestamptz
+                  constraints:
+                    nullable: false
+              - column:
+                  name: close_time
+                  type: timestamptz
+                  constraints:
+                    nullable: false
+        - addUniqueConstraint:
+            tableName: price_records
+            columnNames: symbol, close_time
+            constraintName: uk_price_records_symbol_close_time
+        - createIndex:
+            tableName: price_records
+            indexName: idx_price_records_symbol_fetched_at
+            columns:
+              - column:
+                  name: symbol
+              - column:
+                  name: fetched_at
