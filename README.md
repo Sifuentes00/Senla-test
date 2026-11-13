@@ -52,6 +52,8 @@ BINANCE_POLL_INTERVAL=PT30S
 
 ## Запуск через Docker Compose
 
+Перед запуском создайте `.env` в корне проекта — шаблон со всеми переменными в разделе «Переменные окружения» выше.
+
 ```bash
 docker compose up --build
 ```
